@@ -1,6 +1,4 @@
 package org.example.domain
-
-import org.example.data.model.UserDTO
 import org.example.domain.Pesponse.UserResponse
 import org.example.domain.Request.AuthorizeRequest
 import org.example.domain.Request.ChangePasswordRequest

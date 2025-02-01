@@ -1,7 +1,7 @@
 package org.example.ui
 
 class MainMenu(
-    private val UserUI: UserUI) {
+    private val userUI: UserUI) {
     val menuItems = listOf(
         "1. Авторизоваться",
         "2. Зарегестрироваться",
@@ -19,7 +19,9 @@ class MainMenu(
         }
         catch (e: Exception){
             println(e.message)
-
+            userUI.userAuthorized?.let {
+                displayMenuForAuthorizeUser()
+            }
         }
     }
 
@@ -31,13 +33,13 @@ class MainMenu(
         when (menuPosition){
             1 -> {
                 displayMenuItem {
-                    UserUI.authorize()
+                    userUI.authorize()
                     displayMenuForAuthorizeUser()
                 }
             }
             2 -> {
                 displayMenuItem {
-                    UserUI.registration()
+                    userUI.registration()
                     displayMenu()
                 }
             }
@@ -49,27 +51,24 @@ class MainMenu(
             }
         }
     }
-    fun displayMenuForAuthorizeUser(){
+
+    private fun displayMenuForAuthorizeUser(){
         println(menuAuthorizedItems.joinToString ("\n"))
         val menuPosition = readlnOrNull()?.toIntOrNull()
         if (menuPosition == null) displayMenuForAuthorizeUser()
-            when (menuPosition){
-                1 -> {
-                    displayMenuItem {
-                        UserUI.changePassword()
-                    }
-                }
-                2 -> {
-                    displayMenuItem {
-                        UserUI.changeProfile()
-                    }
-                }
-                3 -> {
-                    return
-                }
-                else -> {
-                    displayMenu()
+        when (menuPosition){
+            1 -> {
+                displayMenuItem {
+                    userUI.changePassword()
                 }
             }
+            2 -> {
+                userUI.changeProfile()
+            }
+            3 -> {
+                return
+            }
+            else -> displayMenuForAuthorizeUser()
+        }
     }
 }

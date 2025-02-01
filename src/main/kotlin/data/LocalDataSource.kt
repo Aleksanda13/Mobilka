@@ -6,21 +6,21 @@ val shoesList = listOf(
     ShoesDTO(
         shoesId = 1,
         shoesName = "Nike",
-        shoesDesc = "Beauty",
+        shoesDescription = "Beauty",
         shoesUrl = "url1",
         category = "cat1"
     ),
     ShoesDTO(
         shoesId = 2,
         shoesName = "Nike",
-        shoesDesc = "Beauty",
+        shoesDescription = "Beauty",
         shoesUrl = "url2",
         category = "cat1"
     ),
     ShoesDTO(
         shoesId = 3,
         shoesName = "Same",
-        shoesDesc = "Beauty",
+        shoesDescription = "Beauty",
         shoesUrl = "url3",
         category = "cat2"
     )

@@ -1,7 +1,6 @@
 package org.example.domain
 
 import org.example.data.UserRepository
-import org.example.data.UserRepositoryImpl
 import org.example.domain.Pesponse.UserResponse
 import org.example.domain.Request.AuthorizeRequest
 import org.example.domain.Request.ChangePasswordRequest
@@ -43,12 +42,10 @@ class UserUseCaseImpl (private val userRepository: UserRepository) : UserUseCase
 
     override fun changeProfile(changeProfileRequest: ChangeProfileRequest) {
         var updatedUser = userRepository.findUserbyId(changeProfileRequest.userId)
-        updatedUser.firstName = changeProfileRequest.newFirstName
-        updatedUser.lastName = changeProfileRequest.newLastName
-        updatedUser.phone = changeProfileRequest.newPhone
-        updatedUser.address = changeProfileRequest.newAddress
+        if (!changeProfileRequest.newFirstName.isNullOrEmpty()) updatedUser.firstName = changeProfileRequest.newFirstName
+        if (!changeProfileRequest.newLastName.isNullOrEmpty()) updatedUser.lastName = changeProfileRequest.newLastName
+        if (!changeProfileRequest.newPhone.isNullOrEmpty()) updatedUser.phone = changeProfileRequest.newPhone
+        if (!changeProfileRequest.newAddress.isNullOrEmpty()) updatedUser.address = changeProfileRequest.newAddress
         userRepository.updateUserById(changeProfileRequest.userId, updatedUser)
-
-
     }
 }

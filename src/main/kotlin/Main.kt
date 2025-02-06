@@ -7,8 +7,9 @@ import org.example.ui.UserUI
 
 fun main() {
     val userRepository = UserRepositoryImpl()
-    val userUseCase = UserUseCaseImpl()
+    val userUseCase = UserUseCaseImpl(userRepository)
     val userUI = UserUI(userUseCase)
-    val mainMenu = MainMenu(userUI)
-    mainMenu.displayMenu()
+    userUI.authorize()
+    userUI.changePassword()
+    userUI.authorize()
 }

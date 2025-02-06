@@ -8,5 +8,5 @@ interface FavouriteRepository {
 
     fun removeFavourites()
 
-    fun getFavouriteByUserId(userId: Int): Array<Int>
+    fun getFavouriteByUserId(userId: Int): IntArray
 }

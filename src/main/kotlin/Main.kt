@@ -7,7 +7,7 @@ import org.example.ui.UserUI
 
 fun main() {
     val userRepository = UserRepositoryImpl()
-    val userUseCase = UserUseCaseImpl(userRepository)
+    val userUseCase = UserUseCaseImpl()
     val userUI = UserUI(userUseCase)
     val mainMenu = MainMenu(userUI)
     mainMenu.displayMenu()

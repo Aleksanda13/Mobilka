@@ -27,7 +27,9 @@ class ShoesRepositoryImpl : ShoesRepository {
         return oldShoes
     }
 
-    override fun getAllShoes() : List<ShoesDTO> = shoesSource
+    override fun getAllShoes(): List<ShoesDTO> {
+        return shoesSource
+    }
 
     override fun findShoesById(shoesId: Int): ShoesDTO {
         val findShoes = shoesSource.firstOrNull { it.shoesId == shoesId }

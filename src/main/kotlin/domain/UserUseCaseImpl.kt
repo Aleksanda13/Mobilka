@@ -1,5 +1,7 @@
 package org.example.domain
 
+import org.example.data.FavouriteRepository
+import org.example.data.ShoesRepository
 import org.example.data.UserRepository
 import org.example.domain.Pesponse.UserResponse
 import org.example.domain.Request.AuthorizeRequest
@@ -8,7 +10,10 @@ import org.example.domain.Request.ChangeProfileRequest
 import org.example.domain.Request.RegistrationRequest
 import org.example.domain.Response.UserDTOtoUserResponse
 
-class UserUseCaseImpl (private val userRepository: UserRepository) : UserUseCase {
+class UserUseCaseImpl (private val userRepository: UserRepository,
+    private val favouriteRepository: FavouriteRepository,
+    private val shoesRepository: ShoesRepository
+) : UserUseCase {
     override fun authorize(authorizeRequest: AuthorizeRequest): UserResponse {
         val findUser = userRepository.getAllUsers()
             .firstOrNull {
@@ -20,7 +25,9 @@ class UserUseCaseImpl (private val userRepository: UserRepository) : UserUseCase
         require(findUser.password == authorizeRequest.password) {
             "Пароли не совпадают"
         }
-        return UserDTOtoUserResponse(findUser)
+        val favourite = favouriteRepository.getFavouriteByUserId(userId = findUser.userId)
+        val shoesFavorite = shoesRepository.getAllShoes().filter { it.shoesId in favourite }
+        return UserDTOtoUserResponse(findUser, shoesFavorite)
     }
 
     override fun registration(registrationRequest: RegistrationRequest): UserResponse {
